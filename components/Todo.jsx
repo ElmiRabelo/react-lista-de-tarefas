@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 class Todo extends Component {
   constructor(props){
     super(props);
-    this.state = {editing: false, value: this.props.task}
+    this.state = {editing: false, task: this.props.task}
   }
 
   //responsavel por deletar uma tarefa
@@ -17,13 +17,14 @@ class Todo extends Component {
 
   //Atualiza em tempo real o texto de input da edição
   handleChange = (e) => {
-    this.setState( {value: e.target.value});
+    this.setState( {[e.target.name]: e.target.value});
   }
 
   //Atualiza o valor de editing e faz com o texto editado seja renderizado em um li
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({value: this.state.value, editing: false});
+    this.props.updateTodo(this.props.id, this.state.task);
+    this.setState({editing: false});
 
   }
 
@@ -32,11 +33,11 @@ class Todo extends Component {
     let taskEdit;
     if(this.state.editing) {
       taskEdit = (<form onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.value} onChange={this.handleChange} />
+        <input type="text" value={this.state.task} name='task' onChange={this.handleChange} />
         <input type='submit' value='Confirmar' />
       </form>)
     } else {
-      taskEdit = <li>{this.state.value}</li>
+      taskEdit = <li>{this.state.task}</li>
     }
 
     return (
