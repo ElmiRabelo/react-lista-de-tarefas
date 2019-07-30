@@ -13,7 +13,7 @@ class TodoList extends Component {
   //Reponsavel por criar uma nova todo utilizando o form e atualizar no state
   create = todo => {
     //Criada key unica para cada Todo e adicionando em seguida para array em State
-    const newTodo = {...todo, id: uuid()};
+    const newTodo = {...todo, id: uuid(), done: false};
     this.setState(state => ({
       todos: [...state.todos, newTodo]
     }))
@@ -35,10 +35,30 @@ class TodoList extends Component {
     this.setState( {todos: updatedTodos} );
   }
 
+
+  //Modifica a todo para completa ou para não completa e atualiza no state.
+  toggleDone = (id) => {
+    const doneTodos = this.state.todos.map( todo => {
+      if(todo.id === id) {
+        return {...todo, done: !todo.done};
+      }
+      return todo;
+    });
+    this.setState( {todos: doneTodos} );
+  }
+
   render() {
     //Para cada todo no array vai ser criado um novo component com Todo
     const renderTodos = this.state.todos.map(todo => (
-      <Todo task={todo.task} key={todo.id} id={todo.id} deleteTodo={this.delete} updateTodo={this.update} />
+      <Todo
+        task={todo.task}
+        key={todo.id}
+        id={todo.id}
+        done={todo.done}
+        deleteTodo={this.delete}
+        updateTodo={this.update}
+        toggleDone={this.toggleDone}
+      />
     ));
     return (
       <div className='TodoList'>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import './Todo.css';
 
 class Todo extends Component {
   constructor(props){
@@ -28,6 +29,10 @@ class Todo extends Component {
 
   }
 
+  handleToggle = () => {
+    this.props.toggleDone(this.props.id);
+  }
+
   render() {
     //Verificação para mostrar um input de edição da tarefa ou a tarefa na lista
     let taskEdit;
@@ -37,7 +42,7 @@ class Todo extends Component {
         <input type='submit' value='Confirmar' />
       </form>)
     } else {
-      taskEdit = <li>{this.state.task}</li>
+      taskEdit = <li onClick={this.handleToggle} className={this.props.done ? 'Todo-done' : ''}> {this.state.task} </li>
     }
 
     return (
