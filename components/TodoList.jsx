@@ -7,7 +7,7 @@ import uuid from 'uuid/v4';
 class TodoList extends Component {
   constructor(props){
     super(props);
-    this.state = {todos: [{task: 'Fazer comida'}, {task: 'Terminar de Estudar'}]}
+    this.state = {todos: []}
   }
 
   //Reponsavel por criar uma nova todo utilizando o form
@@ -21,8 +21,7 @@ class TodoList extends Component {
 
   //Reponsavel por deletar uma todo
   delete = id => {
-    let filterTodos = this.state.todos.filter( todo => todo.id !== id);
-    this.setState({todos: filterTodos});
+    this.setState({todos: this.state.todos.filter( todo => todo.id !== id)});
   }
 
   render() {
