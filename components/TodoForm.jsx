@@ -10,8 +10,8 @@ class TodoForm extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
+    //Elevara o state de TodoForm para TodoList que executa o method create em TodoList
     this.props.createTodo(this.state);
-    // this.props.createTodo({...this.state, id: uuid()});
     this.setState({task: ''});
 
   }
