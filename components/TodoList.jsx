@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import Todo from './Todo';
 import TodoForm from './TodoForm';
 import uuid from 'uuid/v4';
+import './TodoList.css';
 
 class TodoList extends Component {
   constructor(props){
@@ -62,8 +63,8 @@ class TodoList extends Component {
     ));
     return (
       <div className='TodoList'>
-        <h1>Lista de Tarefas </h1>
-        <ul>
+        <h1 className="TodoList-title">Lista de Tarefas </h1>
+        <ul className="TodoList-lista">
           {renderTodos}
         </ul>
         <TodoForm createTodo={this.create}/>
